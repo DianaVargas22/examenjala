@@ -1,0 +1,10 @@
+D:\SCESI\jala\dev-program-assessment\Assessment\bin\Debug\netcoreapp3.1\Assessment.deps.json
+D:\SCESI\jala\dev-program-assessment\Assessment\bin\Debug\netcoreapp3.1\Assessment.dll
+D:\SCESI\jala\dev-program-assessment\Assessment\bin\Debug\netcoreapp3.1\Assessment.pdb
+D:\SCESI\jala\dev-program-assessment\Assessment\obj\Debug\netcoreapp3.1\Assessment.csproj.AssemblyReference.cache
+D:\SCESI\jala\dev-program-assessment\Assessment\obj\Debug\netcoreapp3.1\Assessment.GeneratedMSBuildEditorConfig.editorconfig
+D:\SCESI\jala\dev-program-assessment\Assessment\obj\Debug\netcoreapp3.1\Assessment.AssemblyInfoInputs.cache
+D:\SCESI\jala\dev-program-assessment\Assessment\obj\Debug\netcoreapp3.1\Assessment.AssemblyInfo.cs
+D:\SCESI\jala\dev-program-assessment\Assessment\obj\Debug\netcoreapp3.1\Assessment.csproj.CoreCompileInputs.cache
+D:\SCESI\jala\dev-program-assessment\Assessment\obj\Debug\netcoreapp3.1\Assessment.dll
+D:\SCESI\jala\dev-program-assessment\Assessment\obj\Debug\netcoreapp3.1\Assessment.pdb

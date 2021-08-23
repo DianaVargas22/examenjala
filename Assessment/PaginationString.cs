@@ -9,50 +9,69 @@ namespace Assessment
         private readonly int pageSize;
         private int currentPage;
 
-        public PaginationString(string source, int pageSize, IElementsProvider<string> provider)
+        public PaginationString(string source, int pageSize, IElementsProvider<string> provider, string separator)
         {
-            data = provider.ProcessData(source);
+            data = provider.ProcessData(source,separator);
             currentPage = 1;
             this.pageSize = pageSize;
         }
         public void FirstPage()
         {
-            currentPage = 1;
+            currentPage = 0;
+            
         }
 
         public void GoToPage(int page)
         {
-            throw new System.NotImplementedException();
+            if(page > 0 && page< pageSize){
+                currentPage = page;
+            }else{
+                throw new System.InvalidOperationException();
+            }
         }
 
         public void LastPage()
         {
-            throw new System.NotImplementedException();
+            currentPage = pageSize-1;
+           // throw new System.NotImplementedException();
         }
 
         public void NextPage()
         {
-            
+            if(currentPage < pageSize){
+                currentPage = currentPage++;
+            }else{
+                throw new System.NotImplementedException();
+            }
         }
 
         public void PrevPage()
         {
-            throw new System.NotImplementedException();
+            if(currentPage >= 1){
+                currentPage = --currentPage;
+            }else{
+                throw new System.InvalidOperationException();
+            }
+            
         }
 
-        public IEnumerable<string> GetVisibleItems()
+        public IEnumerable<string> GetVisibleItems(int number)
         {
-            return data.Skip(currentPage*pageSize).Take(5);
+            return data.Skip(currentPage*pageSize).Take(number);
         }
+        
+        
 
         public int CurrentPage()
         {
-            throw new System.NotImplementedException();
+            return currentPage;
+           // throw new System.NotImplementedException();
         }
 
         public int Pages()
         {
-            throw new System.NotImplementedException();
+            return pageSize;
+            //throw new System.NotImplementedException();
         }
     }
 }

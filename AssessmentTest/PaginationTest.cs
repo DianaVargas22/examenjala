@@ -15,79 +15,109 @@ namespace AssessmentTest
         public void TestFirstPage()
         {
             IElementsProvider<string> provider = new StringProvider();
-            IPagination<string> pagination = new PaginationString(COMMA_SAMPLE, 5, provider);
+            IPagination<string> pagination = new PaginationString(COMMA_SAMPLE, 5, provider, ",");
             pagination.FirstPage();
             string [] expectedElements = {"a", "b", "c", "d", "e"};
-            CollectionAssert.AreEqual(expectedElements, pagination.GetVisibleItems().ToList());
+            CollectionAssert.AreEqual(expectedElements, pagination.GetVisibleItems(5).ToList());
+        }
+
+        [TestMethod]
+        public void TestGoToPage()
+        {
+            IElementsProvider<string> provider = new StringProvider();
+            IPagination<string> pagination = new PaginationString(COMMA_SAMPLE, 5, provider, ",");
+            pagination.GoToPage(1);
+            string [] expectedElements = {"f", "g", "h", "i", "j"};
+            CollectionAssert.AreEqual(expectedElements, pagination.GetVisibleItems(5).ToList());
         }
 
         [TestMethod]
         public void TestNextPage()
         {
             IElementsProvider<string> provider = new StringProvider();
-            IPagination<string> pagination = new PaginationString(COMMA_SAMPLE, 5, provider);
+            IPagination<string> pagination = new PaginationString(COMMA_SAMPLE, 5, provider, ",");
             pagination.NextPage();
             string [] expectedElements = {"f", "g", "h", "i", "j"};
-            CollectionAssert.AreEqual(expectedElements, pagination.GetVisibleItems().ToList());
+            CollectionAssert.AreEqual(expectedElements, pagination.GetVisibleItems(5).ToList());
         }
 
         [TestMethod]
         public void TestPreviousPage()
         {
-            
+            IElementsProvider<string> provider = new StringProvider();
+            IPagination<string> pagination = new PaginationString(COMMA_SAMPLE, 5, provider, ",");
+            pagination.GoToPage(1);
+            pagination.PrevPage();
+            string [] expectedElements = {"a", "b", "c", "d", "e"};
+            CollectionAssert.AreEqual(expectedElements, pagination.GetVisibleItems(5).ToList());   
         }
 
         [TestMethod]
         public void TestLastPage()
         {
             IElementsProvider<string> provider = new StringProvider();
-            IPagination<string> pagination = new PaginationString(COMMA_SAMPLE, 5, provider);
+            IPagination<string> pagination = new PaginationString(COMMA_SAMPLE, 5, provider, ",");
             pagination.LastPage();
-            string [] expectedElements = {"v", "w", "x", "y", "z"};
-            CollectionAssert.AreEqual(expectedElements, pagination.GetVisibleItems().ToList());
+            string [] expectedElements = {"u","v", "w", "x", "y", "z"};
+            CollectionAssert.AreEqual(expectedElements, pagination.GetVisibleItems(5).ToList());
         }
 
         [TestMethod]
         public void TestFirstPageWith10PageSize()
         {
             IElementsProvider<string> provider = new StringProvider();
-            IPagination<string> pagination = new PaginationString(COMMA_SAMPLE, 10, provider);
+            IPagination<string> pagination = new PaginationString(COMMA_SAMPLE, 10, provider, ",");
             pagination.FirstPage();
             string [] expectedElements = {"a", "b", "c", "d", "e", "f", "g", "h", "i", "j"};
-            CollectionAssert.AreEqual(expectedElements, pagination.GetVisibleItems().ToList());
+            CollectionAssert.AreEqual(expectedElements, pagination.GetVisibleItems(10).ToList());
         }
 
         [TestMethod]
         public void TestLastPageWith10PageSize()
         {
+            IElementsProvider<string> provider = new StringProvider();
+            IPagination<string> pagination = new PaginationString(COMMA_SAMPLE, 10, provider, ",");
+            pagination.LastPage();
+            string [] expectedElements = {"q","r","s","t","u","v", "w", "x", "y", "z"};
+            CollectionAssert.AreEqual(expectedElements, pagination.GetVisibleItems(10).ToList());
         }
 
         [TestMethod]
         public void TestGoToPageWith10PageSize()
         {
+            IElementsProvider<string> provider = new StringProvider();
+            IPagination<string> pagination = new PaginationString(COMMA_SAMPLE, 10, provider, ",");
+            pagination.GoToPage(1);
+            string [] expectedElements = {"k","l","m","n","o","p","q","r","s","t"};
+            CollectionAssert.AreEqual(expectedElements, pagination.GetVisibleItems(10).ToList());
         }
 
          [TestMethod]
         public void TestFirstPageWithPipeSample()
         {
             IElementsProvider<string> provider = new StringProvider();
-            IPagination<string> pagination = new PaginationString(PIPE_SAMPLE, 5, provider);
+            IPagination<string> pagination = new PaginationString(PIPE_SAMPLE, 5, provider, "|");
             pagination.FirstPage();
             string [] expectedElements = {"a", "b", "c", "d", "e"};
-            CollectionAssert.AreEqual(expectedElements, pagination.GetVisibleItems().ToList());
+            CollectionAssert.AreEqual(expectedElements, pagination.GetVisibleItems(5).ToList());
         }
 
         [TestMethod]
+        [ExpectedException(typeof(InvalidOperationException), "Invalid page number.")]
         public void TestPreviousPageException()
         {
-
+            IElementsProvider<string> provider = new StringProvider();
+            IPagination<string> pagination = new PaginationString(COMMA_SAMPLE, 5, provider, ",");
+            pagination.FirstPage();
+            pagination.PrevPage();
         }
+
         [TestMethod]
         [ExpectedException(typeof(InvalidOperationException), "Invalid page number.")]
         public void TestGoToPageException()
         {
             IElementsProvider<string> provider = new StringProvider();
-            IPagination<string> pagination = new PaginationString(COMMA_SAMPLE, 5, provider);
+            IPagination<string> pagination = new PaginationString(COMMA_SAMPLE, 5, provider, ",");
             pagination.GoToPage(1000000);
         }
     }
